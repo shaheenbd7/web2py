@@ -1,0 +1,55 @@
+{{extend 'layout.html'}}
+<div class="d-flex justify-content-between">
+    <h3 class="text-dark font-weight-bold">Task Entry</h3>
+</div>
+<hr>
+<div>    
+    <form action="{{=URL('worklog','submit')}}" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="employee_id">Assigned To</label>
+                    <select name="employee_id" id="employee_id" class="form-control">
+                        <option value="" selected>Select Name</option>
+                        {{for employee in employees:}}
+                            <option value="{{=employee.id}}">{{=employee.first_name+' '+employee.last_name}}</option>
+                        {{pass}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="team_id">Team</label>
+                    <select name="team_id" id="team_id" class="form-control">
+                        <option value="" selected>Select Team</option>
+                        {{for team in teams:}}
+                        <option value="{{=team.id}}">{{=team.team_name}}</option>
+                        {{pass}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="employee_id">Assigned By</label>
+                    <input type="text" value="{{=auth.user.first_name+' '+auth.user.last_name}}" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="work_details">Task Type</label>
+                    <textarea class="form-control" name="task_type" id="task_type" cols="30" rows="5"></textarea>
+                </div>
+            </div>
+
+            <div class="col-6">
+                
+                
+                <div class="form-group">
+                    <label for="task_details">Details</label>
+                    <textarea class="form-control" name="task_details" id="task_details" cols="30" rows="7"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="feedback">Feedback</label>
+                    <textarea class="form-control" name="feedback" id="feedback" cols="30" rows="6"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- formaction="http://127.0.0.1:8000/mail_service/system_user/index.html"  -->
+        <button type="submit" class="btn btn-primary col-2">Submit</button>
+        <input type="reset" value="Reset" class="btn btn-secondary col-2">
+    </form>
+</div>

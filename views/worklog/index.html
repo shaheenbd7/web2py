@@ -1,0 +1,112 @@
+{{extend 'layout.html'}}
+<div>
+    {{if (auth.user.emp_type=="Admin"):}}
+    <div class="d-flex justify-content-between">
+        <h3 class="text-dark font-weight-bold">Task List</h3>
+        {{ = A(I('Log Entry',_class='fa fa-plus'),_target='blank',_class='btn btn-info pt-1 m-1', _href =
+        URL('worklog','create'))}}
+    </div>
+    {{pass}}
+
+    <form action="{{=URL('work_log','index')}}" method="POST">
+        <div class="row">
+            {{if (auth.user.emp_type=="Admin"):}}
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="employee_id">Employee Name</label>
+                    <select name="employee_id" id="employee_id" class="form-control">
+                        <option value="" selected>All Employee</option>
+                        {{for employee in employees:}}
+                        {{if (sel_emp == employee.id):}}
+                        <option value="{{=employee.id}}" selected>{{=employee.first_name+' '+employee.last_name}}
+                        </option>
+                        {{else:}}
+                        <option value="{{=employee.id}}">{{=employee.first_name+' '+employee.last_name}}</option>
+                        {{pass}}
+                        {{pass}}
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <label for="log_date" style="visibility: hidden;">Date</label>
+                <div class="form-group d-flex justify-content-between">
+                    <button type="submit" class="btn btn-secondary col-6 pt-1 m-1"> <i class="fa fa-search"
+                            aria-hidden="true"></i> Search </button>
+                </div>
+            </div>
+            {{pass}}
+        </div>
+    </form>
+    <hr style="margin-top: -10px!important;">
+    <!-- {{=rows}} -->
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered table-striped">
+            <tr>
+                <th style="text-align:center">SL</th>
+                <th style="text-align:center">Name</th>
+                <th style="text-align:center">Assigned By</th>
+                <th style="text-align:center">Updated By</th>
+                <th style="text-align:center">Type</th>
+                <th style="text-align:center">Task</th>
+                <th style="text-align:center">FeedBack</th>
+                <th style="text-align:center">Action</th>
+            </tr>
+            {{for i, item in enumerate(rows):}}
+            {{if i==items_per_page: break}}
+            <tr>
+                <td style="white-space:nowrap; vertical-align: middle;">
+                    {{ = DIV(i+1)}}
+                </td>
+                <td style="white-space:nowrap; vertical-align: middle;">
+                    {{ = DIV(item['efname']+' '+item['elname'])}}
+                </td>
+                <td style="white-space:nowrap; vertical-align: middle;">
+                    {{ = DIV(item['afname']+' '+item['alname'])}}
+                </td>
+                <td style="white-space:nowrap; vertical-align: middle;">
+                    {{ = DIV(item['afname']+' '+item['alname'])}}
+                </td>
+                <td>
+                    {{ = DIV(item['task_type'])}}
+                </td>
+                <td>
+                    {{ = DIV(item['task_details'])}}
+                </td>
+                <td>
+                    {{ = DIV(item['feedback'])}}
+                </td>
+                <td class="align-self-center" style="vertical-align: middle;">
+                    <div class="d-flex justify-content-center">
+                        {{ if (auth.user.emp_type=="Admin"):}}
+                        {{ = A(I('',_class='fa fa-share'),_target='blank',_class='btn btn-sm btn-success mr-1', _href =
+                        URL('worklog','feedback', args=item['id']))}}
+                        {{else:}}
+                        {{ = A(I('',_class='fa fa-eye'),_target='blank',_class='btn btn-sm btn-dark mr-1', _href =
+                        URL('worklog','show', args=item['id']))}}
+                        {{ = A(I('',_class='fa fa-edit'),_target='blank',_class='btn btn-sm btn-info mr-1', _href =
+                        URL('worklog','edit', args=item['id']))}}
+                        {{pass}}
+                        {{ = A(I('',_class='fa fa-trash'),_target='_self',_class='btn btn-sm btn-danger',_onclick="return confirm('Are You Sure!')", _href =
+                        URL('worklog','delete', args=item['id']))}}
+                    </div>
+                </td>
+            </tr>
+            {{pass}}
+        </table>
+        <nav aria-label="Name">
+            <ul class="pagination" style="flex: auto; justify-content: center;">
+                {{if page:}}
+                <li class="page-item">
+                    <a class="page-link" href="{{=URL(args=[page-1])}}">
+                        << Previous</a>
+                </li>
+                {{pass}}
+                {{if len(rows)>items_per_page:}}
+                <li class="page-item">
+                    <a class="page-link" href="{{=URL(args=[page+1])}}">Next >> </a>
+                </li>
+                {{pass}}
+            </ul>
+        </nav>
+    </div>
+</div>

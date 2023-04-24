@@ -1,0 +1,57 @@
+<div style='background-color: rgb(147, 141, 231)'>
+    <div class="container-fluid">
+      <nav class="navbar navbar-dark navbar-expand-md bg-faded navbar-dark justify-content-center">
+        <a href="{{=URL('default','index')}}" class="navbar-brand d-flex w-50 mr-auto">Work Logs</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse w-100" id="navbarNavDropdown">
+          {{if 'auth' in globals():}}
+          <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <li class="nav-item">
+                {{if auth.user:}}
+                    <a class="nav-link" href="{{=URL('worklog','index')}}"><span class="caret"><i class="fa fa-book">Work Log</i></span></a>
+                {{pass}}
+            </li>
+            <li class="nav-item">
+                {{ if auth.has_membership('Manager'):}}
+                    <a class="nav-link" href="{{=URL('team','index')}}"><span class="caret"><i class="fa fa-book">Team</i></span></a>
+                {{pass}}
+            </li>
+            <li class="nav-item">
+                {{ if auth.has_membership('Manager'):}}
+                    <a class="nav-link" href="{{=URL('employee','index')}}"><span class="caret"><i class="fa fa-book">Employee</i></span></a>
+                {{pass}}
+            </li>        
+  
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{if auth.user:}}<span><i class='fa fa-user'></i> {{=auth.user.first_name+' '+auth.user.last_name}}</span>{{pass}}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                {{if auth.user:}}
+                <a class="dropdown-item" href="{{=URL('employee','show',args=[auth.user.id])}}">{{=T('Profile')}}</a>
+                <!-- #vars=dict(aa=auth.user.id) -->
+                {{if 'change_password' not in auth.settings.actions_disabled:}}
+                <a class="dropdown-item" href="{{=URL('default','user/change_password')}}">{{=T('Change Password')}}</a>
+                {{pass}}
+                <a class="dropdown-item" href="{{=URL('default','user/logout')}}">{{=T('Logout')}}</a>
+                {{else:}}
+                <a class="dropdown-item" href="{{=URL('default','user/login')}}">{{=T('Login')}}</a>
+                {{if 'register' not in auth.settings.actions_disabled:}}
+                <a class="dropdown-item" href="{{=URL('default','user/register')}}">{{=T('Sign up')}}</a>
+                {{pass}}
+                {{if 'retrieve_password' not in auth.settings.actions_disabled:}}
+                <a class="dropdown-item" href="{{=URL('default','user/retrieve_password')}}">{{=T('Lost Password')}}</a>
+                {{pass}}
+                {{pass}}
+              </div>
+            </li>
+          </ul>
+          {{pass}}
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  

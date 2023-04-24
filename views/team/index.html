@@ -1,0 +1,53 @@
+{{extend 'layout.html'}}
+
+<div>
+    <div class="d-flex justify-content-between" >
+        <h3 class="text-dark font-weight-bold">Team List</h1>
+        {{ = A(I('Add Team',_class='fa fa-plus'),_target='blank',_class='btn btn-info pt-1 m-1', _href = URL('team','create'))}}
+    </div>
+</div>
+
+<hr>
+<!-- {{=rows}} -->
+
+<div class="table-responsive">
+    <table class="table table-sm table-bordered table-striped">
+        <tr>
+            <th style="text-align:center">Team Name</th>
+            <th style="text-align:center">Action</th>
+        </tr>
+        {{for item in rows:}}
+        <tr>
+            <td>
+                {{ = DIV(item.team_name)}}
+            </td>
+            <td class="align-self-center">
+                <div class="d-flex justify-content-center">
+                    {{ = A(I('',_class='fa fa-eye'),_target='blank',_class='btn btn-sm btn-dark mr-1', _href = URL('team','show', args=item.id))}}
+                    {{ = A(I('',_class='fa fa-edit'),_target='blank',_class='btn btn-sm btn-info mr-1', _href = URL('team','edit', args=item.id))}}
+                    {{ = A(I('',_class='fa fa-trash'),_target='blank',_class='btn btn-sm btn-danger',_onclick="return confirm('Are You Sure!')", _href = URL('team','delete', args=item.id))}}
+                </div>
+            </td>
+        </tr>
+        {{pass}}
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+       $(".alert").delay(3e3).slideUp(1e3, function() {
+           $(this).alert('close');
+       });
+   });
+
+   function filterItem(){
+    var search = $('#search').val();
+    if (search.length > 0){
+        return window.location = 'http://127.0.0.1:8000/mail_service/mail_attachment/index/' + search;
+    }
+   }
+  </script>
+
+
+
