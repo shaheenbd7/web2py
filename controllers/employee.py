@@ -32,7 +32,7 @@ def create():
 
 def edit():
     if request.args(0):
-        print('Edit: ', )
+        print('Edit: ', request.args(0))
         teams = db(db.team).select()
         item  = db(db.auth_user.id==request.args(0)).select().first()
         return dict(item=item,teams=teams)
