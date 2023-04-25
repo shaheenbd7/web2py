@@ -1,0 +1,78 @@
+<!-- {{extend 'layout.html'}}
+<div class="d-flex justify-content-between">
+    <h3 class="text-dark font-weight-bold">Add Employee</h3>
+    {{ = A(I('Employee List',_class='fa fa-list'),_target='blank',_class='btn btn-info pt-1 m-1', _href = URL('employee','index'))}}
+</div>
+<hr>
+<div>
+    <form action="{{=URL('employee','submit')}}" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="name">First Name <span class="required text-danger">*</span></label>
+                    <input type="text" name="first_name" class="form-control" id="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Email <span class="required text-danger">*</span></label>
+                    <input type="email" name="email" class="form-control" id="email" required>
+                </div>                
+                <div class="form-group">
+                    <label for="date_of_birth">Date of Birth <span class="required text-danger">*</span></label>
+                    <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp_type">Employee Type <span class="required text-danger">*</span></label>
+                    <select name="emp_type" id="emp_type" class="form-control" required>
+                        <option value="General">General</option>
+                        <option value="Management">Management</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company <span class="required text-danger">*</span></label>
+                    <input type="text" name="company" class="form-control" id="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="designation">Designation <span class="required text-danger">*</span></label>
+                    <input type="text" name="designation" class="form-control" id="designation" required>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="last_name">Last Name <span class="required text-danger">*</span></label>
+                    <input type="text" name="last_name" class="form-control" id="last_name" required>
+
+                </div>
+                <div class="form-group">
+                    <label for="phone">Mobile <span class="required text-danger">*</span></label>
+                    <input type="number" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address <span class="required text-danger">*</span></label>
+                    <input type="text" name="address" class="form-control" id="address" required>
+                </div>
+                <div class="form-group">
+                    <label for="team_id">Team</label>
+                    <select name="team_id" id="team_id" class="form-control">
+                        <option value="" selected>Select Team</option>
+                        {{for team in teams:}}
+                        <option value="{{=team.id}}">{{=team.team_name}}</option>
+                        {{pass}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="department">Departmant <span class="required text-danger">*</span></label>
+                    <input type="text" name="department" class="form-control" id="department" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_of_joining">Date Of Joining <span class="required text-danger">*</span></label>
+                    <input type="date" name="date_of_joining" class="form-control" id="date_of_joining" required>
+                </div>
+
+            </div>
+        </div>
+        <!-- formaction="http://127.0.0.1:8000/mail_service/system_user/index.html"  -->
+        <button type="submit" class="btn btn-primary col-2">Submit</button>
+        <input type="reset" value="Reset" class="btn btn-secondary col-2">
+    </form>
+</div> -->

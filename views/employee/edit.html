@@ -1,0 +1,32 @@
+{{extend 'layout.html'}}
+
+<div>
+    <div class="d-flex justify-content-between">
+        <h3 class="text-dark font-weight-bold">Edit Employee </h3>
+            {{ = A(I('Employee List',_class='fa fa-list'),_target='blank',_class='btn btn-info pt-1 m-1', _href = URL('employee','index'))}}
+    </div>
+</div>
+<hr>
+<div>
+    <form action="{{=URL('employee','submit')}}" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="name">First Name</label>
+                    <input type="text" name="first_name"  value='{{=item.first_name}}' class="form-control" id="first_name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="name">Email</label>
+                    <input type="email" name="email" value='{{=item.email}}' class="form-control" id="email" readonly>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" value='{{=item.last_name}}' class="form-control" id="last_name" readonly>
+                </div>
+            </div>
+        </div>
+    </form>    
+</div>

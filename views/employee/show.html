@@ -1,0 +1,45 @@
+{{extend 'layout.html'}}
+
+<div>
+    <div class="d-flex justify-content-between">
+        <h3 class="text-dark font-weight-bold">Employee Page</h1>
+            {{ = A(I(' Back to Employee List',_class='fa fa-list'),_target='blank',_class='btn btn-info pt-1 m-1', _href = URL('employee','index'))}}
+    </div>
+</div>
+<hr/>
+<div>
+    <form action="{{=URL('employee','submit')}}" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="name">First Name</label>
+                    <input type="text" name="first_name"  value='{{=item.first_name}}' class="form-control" id="first_name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="name">Email</label>
+                    <input type="email" name="email" value='{{=item.email}}' class="form-control" id="email" readonly>
+                </div>              
+                <div class="form-group">
+                    <label for="emp_type">Employee Type</label>
+                    <input type="emp_type" name="emp_type" value='{{=emp_type}}' class="form-control" id="emp_type" readonly>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" value='{{=item.last_name}}' class="form-control" id="last_name" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="team_name">Team Name</label>
+                    <input type="text" name="team_name" value='{{=team_name}}' class="form-control" id="team_name" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="department">Departmant</label>
+                    <input type="text" name="department" value='{{=item.department}}' class="form-control" id="department" readonly>
+                </div>
+            </div>
+        </div>
+    </form>    
+</div>

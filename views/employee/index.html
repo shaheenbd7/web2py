@@ -1,0 +1,67 @@
+{{extend 'layout.html'}}
+
+<div>
+    <div class="d-flex justify-content-between" >
+        <h3 class="text-dark font-weight-bold">Employee List</h3>
+    </div>
+</div>
+<form action="{{=URL('employee','index')}}" method="POST">
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label for="employee_id">Employee Name</label>
+                <select name="employee_id" id="employee_id" class="form-control">
+                    <option value="" selected>All Employee</option>
+                    {{for employee in employees:}}
+                    {{if (sel_emp == employee.id):}}
+                    <option value="{{=employee.id}}" selected>{{=employee.first_name+' '+employee.last_name}}
+                    </option>
+                    {{else:}}
+                    <option value="{{=employee.id}}">{{=employee.first_name+' '+employee.last_name}}</option>
+                    {{pass}}
+                    {{pass}}
+                </select>
+            </div>
+        </div>
+        <div class="col-3">
+            <label for="log_date" style="visibility: hidden;">Date</label>
+            <div class="form-group d-flex justify-content-between">
+                <button type="submit" class="btn btn-secondary col-6 pt-1 m-1"> <i class="fa fa-search"
+                        aria-hidden="true"></i> Search </button>
+                {{ = A(I('Reset',_class='fa fa-arrow-left'),_target='blank',_class='col-6 btn btn-warning pt-1 m-1', _href =
+                    URL('employee','index'))}}
+            </div>
+        </div>
+    </div>
+</form>
+<div class="table-responsive">
+    <table class="table table-sm table-bordered table-striped">
+        <tr>
+            <th style="text-align:center">Name</th>
+            <th style="text-align:center">Email</th>
+            <th style="text-align:center">Employee Type</th>
+            <th style="text-align:center">Action </th>
+        </tr>
+        {{for i, item in enumerate(rows):}}
+            {{if i==items_per_page: break}}
+                <tr>
+                    <td>
+                        {{ = DIV(item.auth_user.first_name + ' ' + item.auth_user.last_name)}}
+                    </td>
+                    <td>
+                        {{ = DIV(item.auth_user.email)}}
+                    </td>
+                    <td>
+                        {{ = DIV(item.auth_user.emp_type)}}
+                    </td>
+                    <td class="align-self-center">
+                        <div class="d-flex justify-content-center">
+                            {{ = A(I('Details',_class='fa fa-eye'),_target='blank',_class='btn btn-sm btn-dark mr-1', _href = URL('employee','show', args=item.auth_user.id))}}
+                            {{ = A(I('Edit',_class='fa fa-edit'),_target='blank',_class='btn btn-sm btn-info mr-1', _href = URL('employee','edit', args=item.auth_user.id))}}
+                            {{ = A(I('Delete',_class='fa fa-trash'),_target='blank',_class='btn btn-sm btn-danger',_onclick="return confirm('Are You Sure!')", _href = URL('employee','delete', args=item.auth_user.id))}}
+                        </div>
+                    </td>
+                </tr>
+        {{pass}}
+    </table>
+</div>
