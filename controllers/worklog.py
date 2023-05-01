@@ -42,7 +42,7 @@ def index():
         # sql += " on au.id=wl.employee_id LEFT JOIN auth_user as au2 on au2.id=wl.assigned_by" 
         # sql += " where wl.employee_id="+str(user_id)
         sql ="SELECT au.first_name as efname,au.last_name as elname,au2.first_name as afname,au2.last_name as alname, wl.* FROM work_logs as wl LEFT JOIN auth_user as au on au.id=wl.employee_id LEFT JOIN auth_user as au2 on au2.id=wl.assigned_by"
-
+        print("Task List: Admin User")
     else:
         # sql ="SELECT au.first_name as efname,au.last_name as elname,au2.first_name as afname"
         # sql += ",au2.last_name as alname, wl.* FROM work_logs as wl LEFT JOIN auth_user as au"

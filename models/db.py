@@ -9,6 +9,10 @@ from importlib.metadata import requires
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
 
+# FOR API (Code: shan)
+from gluon.tools import *
+
+service = Service(globals())                   # for json, xml, jsonrpc, xmlrpc, amfrpc
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
 # File is released under public domain and you can use without limitations
